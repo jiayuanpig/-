@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#time{
+				width: 100px;
+				height: 100px;
+				background-color: blueviolet;
+				font-size: 80px;
+				margin-left: 200px;
+				vertical-align: middle;
+				text-align: center;
+			}
+			#btn{
+				margin-left: 160px;
+				margin-top: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var time = document.getElementById("time");
+				var start = document.getElementById("start");
+				var stop = document.getElementById("stop");
+				var refresh = document.getElementById("refresh");
+				var num = 1;
+				var timer = null;
+				//每次点击按钮，都会开启一个定时器，导致速度加快，应该设置只能开启一个定时器
+				//因此点击之前应该关闭上一个计时器
+				start.onclick = function(){
+//					alert("start");
+					clearInterval(timer);
+					timer = setInterval(function(){
+						time.innerHTML = num++;
+						if(num>99){
+							clearInterval(timer);
+//							alert("5");
+						}
+					},1000);
+				}
+				stop.onclick = function(){
+//					alert("stop");
+					clearInterval(timer);
+				}
+				refresh.onclick = function(){
+//					alert("refresh");
+					clearInterval(timer);
+					time.innerHTML = 0;
+					num = 1;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h3>计时器：</h3>
+		<div id="time">0</div>
+		<div id="btn">
+			<button id="start">开始计时</button>
+			<button id="stop">结束计时</button>
+			<button id="refresh">重置</button>
+		</div>
+	</body>
+</html>

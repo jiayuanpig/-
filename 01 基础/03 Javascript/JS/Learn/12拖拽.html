@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>拖拽</title>
+		<style>
+			#divBig{
+				width: 1000px;
+				height: 1000px;
+				background-color: red;
+				position: absolute;
+			}
+			#div1{
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				//拖拽div1
+				//当鼠标点击黄色色块时，可以移动黄色色块
+				//色块跟随鼠标移动
+				//鼠标松开时色块固定在当前位置
+				var box1 = document.getElementById("div1");
+				box1.onmousedown = function(event){
+					//为了让鼠标移动更自然
+					//调整div偏移量 :鼠标.clientX - 元素.offsetLeft 鼠标.clientY - 元素.offsetTop
+					var ol = event.clientX - box1.offsetLeft; 
+					var ot = event.clientY - box1.offsetTop; 
+					document.onmousemove = function(event){
+						event = event || window.event;
+						//获取鼠标位置
+						div1.style.left = event.clientX - ol +"px";
+						div1.style.top = event.clientY - ot +"px";
+					}
+					document.onmouseup = function(){
+						//鼠标松开，取消可移动状态
+//						alert("$$$"); 
+						document.onmousemove = null;
+						document.onmouseup= null;
+					}
+					//为了防止浏览器选中元素后自动进行搜索，要禁止该行为
+					return false;
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="divBig">
+			我是一段文字。
+			<div id="div1">
+				
+			</div>
+		</div>
+	</body>
+</html>

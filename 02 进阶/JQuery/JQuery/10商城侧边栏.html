@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			ul{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			.body{
+				width: 1000px;
+				height: 2500px;
+				margin:50px auto;
+				background-color: gray;
+			}
+			
+			.side-nav{
+				position: fixed;
+				right: 170px;
+				top: 150px;
+				width: 60px;
+				display: none;
+			}
+			.side-nav li{
+				height: 50px;
+				width: 50px;
+				margin: 5px 0;
+				font-size: 20px;
+				line-height: 25px;
+				background-color: #FFC0CB;
+				border:solid 1px yellow;
+				color: red;
+				cursor: pointer;
+			}
+			
+			.side-nav li.active{
+				border:solid 1px red;
+				color: white;
+			}
+			
+			.back{
+				width: 50px;
+				height: 50px;
+				font-size: 20px;
+				line-height: 25px;
+				border:solid 1px red;
+				color: red;
+				cursor: pointer;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				var $sideBarMenu = $(".side-nav li");
+				var $subbnav = $(".side-nav");
+				
+				if($(document).scrollTop()>=20){
+					$subbnav.fadeIn();
+				}else{
+                    $subbnav.fadeOut();
+                }
+				
+				
+//				1、滑动到一定程度,侧边导航栏显示
+//				2、继续下滑,会根据内容,侧边导航栏显示不同内容
+				 $(window).scroll(function () {
+	                TOP = $(document).scrollTop();
+	
+	                if(TOP >= $(".content4").offset().top){
+	                    $sideBarMenu.eq(3).addClass("active").siblings().removeClass();
+	                } else if(TOP >= $(".content3").offset().top){
+	                    $sideBarMenu.eq(2).addClass("active").siblings().removeClass();
+	                } else if(TOP >= $(".content2").offset().top){
+	                    $sideBarMenu.eq(1).addClass("active").siblings().removeClass();
+	                } else if(TOP >= $(".content1").offset().top){
+	                    $sideBarMenu.eq(0).addClass("active").siblings().removeClass();
+	                } else if(TOP >= 20){
+	                    $subbnav.fadeIn();
+	                }else{
+	                    $subbnav.fadeOut();
+	                }
+            	});
+				
+//				3、点击侧边菜单跳转相应位置
+				$sideBarMenu.click(function () {
+	                $("html,body").stop().animate({
+	                    // 给具有相同效果的元素添加 共同的样式 com
+	                    "scrollTop" : $(".com").eq($(this).index()).offset().top + 1
+	                },500);
+	            });
+				
+				
+//				4、点击返回顶部,实现效果
+				$(".back").click(function () {
+//					$(document).scrollTop(0);
+	                $("html,body").animate({"scrollTop":0},300); // html,body ?
+	            });
+				
+				
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="body">
+			<div class="com content1" style="height: 500px;background-color: yellow;"></div>
+			<div class="com content2" style="height: 500px;background-color: green;"></div>
+			<div class="com content3" style="height: 500px;background-color: pink;"></div>
+			<div class="com content4" style="height: 500px;background-color: red;"></div>
+		</div>
+		<div class="side-nav">
+			<ul>
+				<li>电脑数码</li>
+				<li>家电通讯</li>
+				<li>服饰精品</li>
+				<li>美容珠宝</li>
+			</ul>
+			<div class="back">返回顶部</div>
+		</div>
+	</body>
+</html>

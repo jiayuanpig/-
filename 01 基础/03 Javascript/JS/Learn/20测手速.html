@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测测你的手速</title>
+		<style type="text/css">
+			div{
+				position: absolute;
+			}
+			#btnBox{
+				left: 140px;
+				top: 80px;
+			}
+			#timeBox{
+				font-size: 40px;
+				left: px;
+				top: 140px;
+			}
+			#testBox{
+				width: 100px;
+				height: 100px;
+				top: 400px;
+			}
+			#resultBox{
+				width: 700px;
+				height: 100px;
+				top: 700px;
+				font-size: 50px;
+				color: red;
+			}
+			#time{
+				background-color: #FF0000;
+				width: 100px;
+				height: 100px;
+				left: 60px;
+				margin-top: 20px;
+				color: #FFFFFF;
+				text-align: center;
+				vertical-align: middle;
+				font-size: 80px;
+			}
+			.player{
+				width: 50px;
+				height: 50px;
+				text-align: center;
+			}
+			#player1{
+				background-color: green;
+				margin-top: 20px;
+			}
+			#player2{
+				background-color: pink;
+				margin-top: 100px;
+			}
+		</style>
+		<script type="text/javascript">
+			window,onload = function(){
+				var start = document.getElementById("start");
+				var time = document.getElementById("time");
+				var setTime = document.getElementById("setTime");
+				var i = 3;
+				var speed = new Array();
+				speed[0] = 1;
+				speed[1] = 1;
+				var player1 = document.getElementById("player1");
+				var player2 = document.getElementById("player2");
+				//开始倒计时
+				start.onclick = function(){
+					var timer1 = setInterval(function(){
+						time.innerHTML = i--;
+						if(i<0){
+							clearInterval(timer1);
+						}
+					},1000);
+				}
+				//导入设置的时长
+				var playTime = 0;
+				setTime.oninput = function(setTime){
+					playTime = this.value;
+				}
+				//div移动
+				function move(obj,num){
+					var timer2 = setInterval(function(){
+						obj.style.left = obj.offsetLeft + speed[num] + "px";
+						playTime--;
+					},1000);
+					if(playTime<0){
+						clearInterval(timer2);
+					}
+				}
+				if(i < 0){
+					move(player1,0);
+					move(player2,1);
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="setTimeBox">
+			请输入游戏时长：
+			<input id="setTime" />
+		</div>
+		<div style="top: 40px;">请确认开始游戏：</div>
+		<div id="btnBox">
+			<button  style="width: 80px;height: 40px;" id="start">开始</button>
+		</div>
+		<div id="timeBox">
+			Are you ready?
+			<div id="time"></div>
+		</div>
+		<div style="top: 350px;"> ---------------------------------------------游戏区---------------------------------------------</div>
+		<div id="testBox">
+			<div class="player" id="player1">原谅绿1</div>
+			<div class="player" id="player2">骚气粉2</div>
+			<div style="height: 200px;width: 2px;background-color: red;left: 600px;"></div>
+		</div>
+		<div style="top: 600px;"> ---------------------------------------------游戏区---------------------------------------------</div>
+		<div id="resultBox">
+			恭喜“某某队”获胜！！！
+		</div>
+	</body>
+</html>

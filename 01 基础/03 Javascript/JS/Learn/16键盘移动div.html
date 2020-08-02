@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#div1{
+				background-color: blue;
+				width: 100px;
+				height: 100px;
+				position: absolute;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				
+				var speed = 10;
+				var dir = 0;//表示方向,通过修改dir来更改移动方向
+//				设置一个定时器来取消按键时的卡顿问题
+				setInterval(function(){
+					/*
+					 * 37	左
+					 * 38	上
+					 * 39	右
+					 * 40	下
+					 */
+					switch(dir){
+						case 37://左
+							div1.style.left = div1.offsetLeft - speed + "px";
+							break;
+						case 39://右
+							div1.style.left = div1.offsetLeft + speed + "px";
+							break;
+						case 38://上
+							div1.style.top = div1.offsetTop - speed + "px";
+							break;
+						case 40://下
+							div1.style.top = div1.offsetTop + speed + "px";
+							break;
+					}
+					
+				},30);
+				//当按键按下，给dir赋值
+				document.onkeydown = function(event){
+					event = event || window.event;
+//					alert("你按了键盘");
+					//如果按下CTRL，移动速度会加快
+					if(event.ctrlKey){
+						speed = 100;
+					}
+//					alert(event.keyCode);
+					dir = event.keyCode;
+					
+				}
+				//当按键松开，给div为0
+				document.onkeyup = function(event){
+					event = event || window.event;
+//					alert("你按了键盘");
+					//如果按下CTRL，移动速度会加快
+					speed = 10;
+//					alert(event.keyCode);
+					dir = 0;
+					
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>

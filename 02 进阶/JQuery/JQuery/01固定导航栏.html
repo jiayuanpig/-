@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>固定导航栏</title>
+		<!--页面滚动到一定程度，导航栏固定-->
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				color: white;
+				text-align: center;
+			}
+			.header{
+				height: 100px;
+				background-color: black;
+			}
+			.nav{
+				height: 50px;
+				background-color: red;
+				width: 100%;
+			}
+			.body{
+				height: 2000px;
+				background-color: gray;
+			}
+		</style>
+		
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				//获取header的高度
+				var headerHeight = $(".header").css("height");
+				headerHeight = parseFloat(headerHeight);
+				
+				$(window).scroll(function(){
+					//获取滚动条距离
+					var scrollHeight = $(document).scrollTop();
+					scrollHeight = parseFloat(scrollHeight);
+					//当文档卷去的高度 大于等于 header高度时，让导航栏变为固定定位
+					if(scrollHeight > headerHeight){
+						$(".nav").css({
+							"position":"fixed",
+							"top":0
+						});
+						//当导航栏变为固定定位时，需要给下面的元素添加margin-top
+						$(".body").css("margin-top",$(".nav").height());
+					}else{//当上划时取消固定效果
+						$(".nav").css({
+							"position":"static"
+						});
+						$(".body").css("margin-top",0);
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="header">我是头部</div>
+		<div class="nav">我是导航栏</div>
+		<div class="body">我是主体部分</div>
+	</body>
+</html>

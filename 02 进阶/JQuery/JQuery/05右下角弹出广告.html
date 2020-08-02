@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title>右下角弹出广告</title>
+		<!--页面加载后会自动弹出广告-->
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			.body{
+				width: 100%;
+				height: 2000px;
+				background-color: gray;
+				color: white;
+			}
+			
+			.ad{
+				position: fixed;
+				right: 10px;
+				bottom: 0;
+				width: 300px;
+				height: 200px;
+				background-color: red;
+				display: none;
+			}
+			.delete{
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 25px;
+				height: 25px;
+				background-color: yellow;
+				font-size: 20px;
+				line-height: 25px;
+				cursor: pointer;
+			}
+			.delete:hover{
+				background-color: green;
+				color: white;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				$(".ad").slideDown(800);
+				$(".delete").click(function(){
+					//划出
+					$(".ad").slideUp(800);
+					//淡出
+//					$(".ad").fadeOut(800);
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="body">我是主体</div>
+		<div class="ad">
+			<div class="delete">×</div>
+			我是广告
+		</div>
+	</body>
+</html>

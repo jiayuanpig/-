@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>轮播图-层级轮播图</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			ul li{
+				float: left;
+			}
+			a{
+				text-decoration: none;
+			}
+			
+			
+			.wrap{
+				width: 500px;
+				height: 400px;
+				margin: 10px auto;
+				background-color: gray;
+				overflow: hidden;
+				position: relative;
+			}
+			.wrap ul{
+				position: relative;
+				z-index: 1;
+			}
+			.wrap ul li{
+				width: 500px;
+				height: 400px;
+				background: yellow;
+				position: absolute;
+			}
+			
+			.wrap ol{
+				position: absolute;
+				bottom: 30px;
+				right: 30px;
+				z-index: 2;
+			}
+			.wrap ol li{
+				float: left;
+				background-color: pink;
+				width: 20px;
+				height: 20px;
+				margin: 0 5px;
+				border: solid 1px white;
+			}
+			.wrap ol li:hover{
+				cursor: pointer;
+			}
+			.wrap ol li.active{
+				border: solid 1px gray;
+				padding: 2px;
+				margin-top: -4px;
+				color: orange;				
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				var zIndex = 0;
+				var width = $(".wrap ul").width();
+				$(".wrap ol li").mouseenter(function(){
+					zIndex++;
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".wrap ul li").eq($(this).index())
+						.css({
+							"z-index":zIndex,
+							"left":width
+						})
+						.animate({
+							"left":0
+						},1000);
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<ul>
+				<li>我是1</li>
+				<li>我是2</li>
+				<li>我是3</li>
+				<li>我是4</li>
+				<li>我是5</li>
+			</ul>
+			<ol>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ol>
+		</div>
+		
+	</body>
+</html>

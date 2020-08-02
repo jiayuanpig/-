@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>下级菜单的显示与隐藏</title>
+		<!--当鼠标放在导航栏时自动显示下级菜单-->
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			li{
+				list-style-type: none;
+			}
+			
+			.nav li{
+				float: left;
+				margin: 0 10px;
+				position: relative;
+			}
+			
+			.nav li a{
+				display: block;
+				width: 100px;
+				height: 30px;
+				background-color: red;
+				color: white;
+				text-decoration: none;
+				text-align: center;
+				line-height: 30px;
+			}
+			.nav li a:hover{
+				color: red;
+				background-color: white;
+			}
+			
+			.sub-nav{
+				display: none;
+				position: absolute;
+				background-color: red;
+				color: white;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				
+				//1、无动画效果
+				//分开
+				//当鼠标放在一级菜单上时，对应的二级菜单显示
+//				$(".nav li a").mouseenter(function(){
+//					$(this).siblings().show();
+//				});
+//				//当鼠标离开一级菜单上时，对应的二级菜单隐藏
+//				$(".nav li a").mouseleave(function(){
+//					$(this).siblings().hide();
+//				});
+				
+				//联合
+//				$(".nav li a").hover(function(){
+//					$(this).siblings().show();
+//				},function(){
+//					$(this).siblings().hide();
+//				});
+				
+				
+				//2、有动画效果
+				$(".nav li a").hover(function(){
+					$(this).siblings().slideToggle();
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		
+		<div>
+			<ul class="nav">
+				<li>
+					<a href="#">一级菜单1</a>
+					<ul class="sub-nav">
+						<li>二级菜单1</li>
+						<li>二级菜单2</li>
+						<li>二级菜单3</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">一级菜单2</a>
+					<ul class="sub-nav">
+						<li>二级菜单1</li>
+						<li>二级菜单2</li>
+						<li>二级菜单3</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">一级菜单3</a>
+					<ul class="sub-nav">
+						<li>二级菜单1</li>
+						<li>二级菜单2</li>
+						<li>二级菜单3</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		
+		
+	</body>
+</html>

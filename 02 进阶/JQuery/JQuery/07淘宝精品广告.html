@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title>淘宝精品广告</title>
+		<!--点击对应链接，会展示对应图片-->
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			ul{
+				list-style: none;
+			}
+			
+			a{
+				text-decoration: none;
+				color: white;
+				line-height: 50px;
+			}
+			
+			.wrapper{
+				margin: 20px auto;
+				width: 600px;
+				height: 300px;
+			}
+			
+			.left,.middle,.right{
+				float: left;
+			}
+			.left,.right{
+				width: 100px;
+				background-color: red;
+			}
+			li{
+				height: 50px;
+			}
+			li:hover{
+				background-color: darkred;
+			}
+			.middle{
+				width: 400px;
+				height: 100%;
+				background-color: pink;
+			}
+			.middle div{
+				width: 400px;
+				height: 300px;
+				color: black;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				$(".left").on("mouseenter","li",function(){
+					//获取当前的序号
+					var index = $(this).index();
+					//显示对应内容
+					$(".middle div").eq(index).show().siblings("div").hide();
+				});
+				$(".right").on("mouseenter","li",function(){
+					//获取当前的序号
+					var index = $(this).index() + 6;
+					//显示对应内容
+					$(".middle div").eq(index).show().siblings("div").hide();
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="wrapper">
+			<ul class="left">
+				<li><a href="#">衬衫</a></li>
+				<li><a href="#">毛衣</a></li>
+				<li><a href="#">运动鞋</a></li>
+				<li><a href="#">化妆品</a></li>
+				<li><a href="#">家具</a></li>
+				<li><a href="#">电子产品</a></li>
+			</ul>
+			
+			<ul class="middle">
+				<div><a href="#">1</a></div>
+				<div><a href="#">2</a></div>
+				<div><a href="#">3</a></div>
+				<div><a href="#">4</a></div>
+				<div><a href="#">5</a></div>
+				<div><a href="#">6</a></div>
+				<div><a href="#">7</a></div>
+				<div><a href="#">8</a></div>
+				<div><a href="#">9</a></div>
+				<div><a href="#">10</a></div>
+				<div><a href="#">11</a></div>
+				<div><a href="#">12</a></div>
+			</ul>
+			
+			<ul class="right">
+				<li><a href="#">衬衫</a></li>
+				<li><a href="#">毛衣</a></li>
+				<li><a href="#">运动鞋</a></li>
+				<li><a href="#">化妆品</a></li>
+				<li><a href="#">家具</a></li>
+				<li><a href="#">电子产品</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

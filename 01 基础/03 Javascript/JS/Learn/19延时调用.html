@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/*
+			 * 1、定时器 setInterval(函数,时间)
+			 * 	每隔几秒运行一次，可以重复执行
+			 * 2、清除定时器 clearInterval(计时器名)
+			 * 3、延时器 setTimeout(函数,时间)
+			 *	几秒后只执行一次
+			 */
+			
+			var num = 0;
+			//每三秒执行一次,不会主动停止
+//			setInterval(function(){
+//				console.log(num++);
+//			},3000);
+			
+			//三秒后只执行一次
+			setTimeout(function(){
+				console.log(num++);
+			},3000);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		 <!--冒泡：指的是事件的向上传导，后代事件被触发，其祖先事件也会被触发-->
+		 <!--开发中，大部分冒泡是有用的，但是也可以通过事件对象取消冒泡-->
+		
+		<style type="text/css">
+			#div1{
+				width: 200px;
+				height: 200px;
+				background-color: #98BF21;
+			}
+			#div2{
+				width: 50px;
+				height: 50px;
+				background-color:yellow;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var div1 = document.getElementById("div1");
+				var div2 = document.getElementById("div2");
+//				var body = document.getElementsByTagName("body");//不能这样用
+//				alert(div1);
+				div1.onclick = function(event){
+					event = event||window.event;
+					event.cancelBubble = true;
+					alert("我是div1");
+				}
+				div2.onclick = function(event){
+					event = event||window.event;
+					event.cancelBubble = true;
+					alert("我是div2");
+				}
+				document.body.onclick = function(event){
+					event = event||window.event;
+					event.cancelBubble = true;
+					alert("我是body");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<div id="div2">
+				冒泡啊冒泡
+			</div>
+		</div>
+	</body>
+</html>

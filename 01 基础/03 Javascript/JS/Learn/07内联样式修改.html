@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#exp{
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.getElementById("btn");
+				btn.onclick = function(){
+					for(var i=0;i<=100;i++){
+//						console.log(getComputedStyle(exp,null).color);
+						if(i%20 == 0){
+							alert(getComputedStyle(exp,null).color);
+							alert(i);
+							exp.style.backgroundColor = "rgb("+i+","+i+","+i+")";
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button id="btn">点我变色</button>
+		<div id="exp">
+			
+		</div>
+	</body>
+</html>

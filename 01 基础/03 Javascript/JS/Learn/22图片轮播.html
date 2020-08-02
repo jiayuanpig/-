@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片轮播</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#outer{
+				width: 1064px;
+				height: 808px;
+				/*居中*/
+				margin: 50px auto;
+				background-color: blueviolet;
+				padding: 40px auto;
+				/*开启相对定位*/
+				position: relative;
+				/*裁剪溢出的部分*/
+				overflow: hidden;
+			}
+			#imgList{
+				/*去除列表无序符号*/
+				list-style: none;
+				/*设置ul宽度，在js中更改更灵活*/
+				/*width: 5400px;*/
+				/*开启绝对定位*/
+				position: absolute;
+				/*图片偏移量*/
+				left: 0;
+			}
+			#imgList li{
+				/*图片设置为横向并列*/
+				float: left;
+				/*图片间隔10px*/
+				margin: 20px;
+			}
+			/*设置导航按钮*/
+			#navDiv{
+				/*绝对定位*/
+				position: absolute;
+				bottom: 40px;
+				/*设置left居中值*/
+				/*
+				 * 原理：
+				 * outer:1064px
+				 * navDiv: (40+10*2)*5 = 300
+				 * (1064-300)/2 = 382
+				 * 使用js来自动控制
+				 */
+				/*left: 382px;*/
+			}
+			#navDiv a{
+				float: left;
+				/*设置超链接宽高*/
+				width: 40px;
+				height: 40px;
+				/*设置背景颜色*/
+				background-color: red;
+				/*设置外边距*/
+				margin:  0 10px;
+				/*设置透明度*/
+				opacity: 0.5;
+				/*兼容IE8提名*/
+				filter: alpha(opacity = 50);
+			}
+			/*设置鼠标移入的效果*/
+			#navDiv a:hover{
+				background-color: black;
+			}
+		</style>
+		<script type="text/javascript">
+			/*
+			 * 尺寸问题：
+			 * 图片尺寸 1024*768
+			 */
+			window.onload = function(){
+				//为了保证img能够灵活放在imgList中，使用js控制imgList宽度
+				var imgList = document.getElementById("imgList");
+				var imgArr = document.getElementsByTagName("img");
+				//注意宽度需要加上margin值
+				imgList.style.width = 1064 * imgArr.length +"px";
+				//设置导航按钮居中
+				var navDiv = document.getElementById("navDiv");
+				var outer = document.getElementById("outer");
+				navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+				//设置默认选中效果
+				var aAll = document.getElementsByTagName("a");
+				//默认选中图片索引
+				var index = 0;
+				aAll[index].style.backgroundColor = "black";
+				
+				//点击超链接，切换到指定图
+				//为所有超链接建立单击响应函数
+				for(var i=0;i<aAll.length;i++){
+					//为每个超链接设置编号
+					aAll[i].num = i;
+					aAll[i].onclick = function(){
+						clearInterval(timer2);
+//						alert("你点了"+this.num);
+						index = this.num;
+						//切换图片
+//						imgList.style.left = -1064*index +"px";
+						move(imgList,-1064*index);
+						//更改导航栏状态
+						setA();
+						changeAuto();
+					}
+				}
+				//创建一个方法，设置选中的a
+				function setA(){
+					//便利所有的a，设置为红色
+					for(var i=0;i<aAll.length;i++){
+						aAll[i].style.backgroundColor = "";
+					}
+					//将选中的a设置为黑色
+					aAll[index].style.backgroundColor = "black";
+				}
+				//实现切换效果动画
+				function move(obj,positionValue){
+					var speed = 10;
+					//确定移动方向
+					var nowPosition = parseInt(getStyle(obj,"left"));
+					if(positionValue < nowPosition){//左移需要更换速度
+						speed = -10;
+					}
+					var oldValue;
+					var newValue;
+					var timer = setInterval(function(){
+						
+						oldValue = parseInt(getStyle(obj,"left"));
+						if(oldValue != positionValue){
+							imgList.style.left = newValue + "px";
+							newValue = oldValue + speed;
+						}
+						
+						if(speed >0){
+							if(newValue > positionValue){
+								newValue = positionValue;
+							}
+						}else{
+							if(newValue < positionValue){
+								newValue = positionValue;
+							}
+						}
+						
+						if(newValue == positionValue){
+							clearInterval(timer);
+						}
+					},10)
+				}
+				//获取样式值
+				function getStyle(obj,name){
+					if(window.getComputedStyle){
+						//正常浏览器方式，有getComputedStyle方法
+						return getComputedStyle(obj,null)[name];
+					}else{
+						//IE8的方式，没有getComputedStyle方法
+						return obj.currentStyle[name];
+					}
+					//另一种简洁代码
+//					return window.getComputedStyle?getComputedStyle(obj,null)[name]:obj.currentStyle[name]
+				}
+				//自动切换
+				changeAuto();
+				var timer2;
+				function changeAuto(){
+					//定时器自动切换
+					var j = 1;
+					timer2 = setInterval(function(){
+						//索引自增
+						index = index + j;
+						setA();
+						move(imgList,-1064*index);
+						if(index == 4){
+							j = -1;
+						}
+						if(index == 0){
+							j = 1;
+						}
+						//执行动画切换图片
+					},4000);
+				}
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<!--创建一个大的div，作为容器-->
+		<div id="outer">
+			<!--创建一个ul，放置图片-->
+			<ul id="imgList">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+			</ul>
+			<!--创建导航按钮-->
+			<div id="navDiv">
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</div>
+		</div>
+	</body>
+</html>

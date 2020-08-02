@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+			}
+			
+			.nav ul{
+				width: 500px;
+				height: 50px;
+				border: solid 1px #808080;
+				margin:0 auto;
+				
+			}
+			.nav li{
+				float: left;
+				width: 100px;
+				height: 50px;
+				line-height: 48px;
+				background-color: white;
+				color: red;
+				text-align: center;
+			}
+			.nav .active{
+				height: 48px;
+				border-top: 2px solid red;
+			}
+			
+			.nav-goods{
+				width: 800px;
+				height: 500px;
+				border: solid 1px #808080;
+				margin:5px auto;
+			}
+			
+			.nav-goods div{
+				display: none;
+			}
+			.nav-goods .selected{
+				display: block;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				$(".nav li").mouseenter(function(){
+					//保存li的序号
+					var index = $(this).index();
+					//设置li的响应样式
+					$(this).addClass("active").siblings().removeClass("active");
+					//设置响应的内容
+					$(".nav-goods div").eq(index).addClass("selected").siblings().removeClass("selected");
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="item">
+			<div class="nav">
+				<ul>
+					<li class="active">品类1</li>
+					<li>品类2</li>
+					<li>品类3</li>
+				</ul>
+			</div>
+			<div class="nav-goods">
+				<div class="selected">品类1的商品</div>
+				<div>品类2的商品</div>
+				<div>品类3的商品</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>移动div</title>
+		<style type="text/css">
+			#Box1{
+				width: 100px;
+				height: 1000px;
+				background-color: yellow;
+				/*开启绝对定位*/
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var Box1 = document.getElementById("Box1");
+				document.onmousemove = function(event){
+					//解决兼容性问题
+					event = event || window.event;
+					//clientX、clientY 是相对于可见窗口的坐标位置
+					//pageX、pageY 是相对于整个页面的位置（不兼容IE8以下）
+					var left = event.pageX;
+					var top = event.pageY;
+					//设置div偏移量
+					Box1.style.left = left + "px";
+					Box1.style.top = top + "px";
+					
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="Box1"></div>
+	</body>
+</html>

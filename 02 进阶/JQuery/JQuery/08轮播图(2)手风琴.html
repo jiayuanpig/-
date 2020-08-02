@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>轮播图-手风琴</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			ul li{
+				float: left;
+			}
+			a{
+				text-decoration: none;
+			}
+			
+			.wrap{
+				/*这里宽度要比里面的元素宽度和要大一点*/
+				/*以防在动画时因为位置不够而换行*/
+				width: 1010px;
+				height: 400px;
+				margin: 10px auto;
+				overflow: hidden;
+			}
+			.wrap ul li{
+				width: 200px;
+				height: 400px;
+				float: left;
+				color: white;
+			}
+			
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				$(".wrap li").mouseenter(function(){
+					$(this).stop().animate({
+						width:600
+					},500).siblings("li").stop().animate({
+						width:100
+					},500);
+				}).mouseleave(function(){
+					$(".wrap li").stop().animate({
+						width:200
+					},500);
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<ul>
+				<li style="background-color: black;">我是1</li>
+				<li style="background-color: blue;">我是2</li>
+				<li style="background-color: red;">我是3</li>
+				<li style="background-color: yellow;">我是4</li>
+				<li style="background-color: pink;">我是5</li>
+			</ul>
+		</div>
+		
+	</body>
+</html>

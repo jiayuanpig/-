@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title>两侧广告页</title>
+		<!--随着页面的滚动，两侧广告页也跟着往下移动-->
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				color: white;
+			}
+			
+			.header{
+				height: 100px;
+				background-color: black;
+			}
+			.body{
+				height: 2000px;
+				background-color: gray;
+			}
+			
+			.ad{
+				width: 100px;
+				height: 200px;
+				background-color: red;
+				position: absolute;
+				top: 200px;
+			}
+			.left{
+				left: 0;
+			}
+			.right{
+				right: 0;
+			}
+			
+		</style>
+		<script src="js/jquery-1.11.1.js"></script>
+		<script>
+			$(function(){
+				//获取广告页当前top值
+				var intTop = parseFloat($(".ad").css("top"));
+				$(window).scroll(function(){
+					//获取滚动条高度
+					var scrollHeight = $(document).scrollTop();
+					//调整广告页的top值
+					
+					//1、无动画
+//					$(".ad").css("top",intTop+scrollHeight);
+					//2、有动画
+					$(".ad").animate({
+						"top": intTop+scrollHeight
+					},10);
+					
+				});
+			});
+		</script>
+		
+		
+	</head>
+	<body>
+		<div class="header">我是头部</div>
+		<div class="body">我是主体</div>
+		<div>
+			<div class="left ad">左边广告</div>
+			<div class="right ad">右边广告</div>
+		</div>
+	</body>
+</html>
