@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件的委派</title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var Alla = document.getElementsByTagName("a");
+				var ul = document.getElementById("ul");
+				var btn = document.getElementById("btn");
+				//新添加的超链接方法不可用
+//				for(var i = 0;i<Alla.length;i++){
+//					Alla[i].onclick = function(){
+//						alert("###");
+//					}
+//				}
+				//添加一次事件，可以使后添加的超链接同样有效
+				//事件的委派:利用冒泡，减少事件绑定次数
+				//弊端：整个黄色区域都会触发
+				//修改：如果触发事件是我们期望的元素，才会触发响应
+				ul.onclick = function(event){
+					event = event || window.event;
+					if(event.target.className == "link"){
+						alert("###");
+					}
+				}
+				 
+				//按钮添加新的超链接
+				btn.onclick = function(){
+//					alert("$$$");
+					var li = document.createElement("li");
+					li.innerHTML = "<a href='javascript:;' class='link'>新建的超链接</a>"
+					ul.appendChild(li);
+					
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div >
+			<ul id="ul" style="background-color: yellow;">
+				<li><a href="javascript:;" class="link">超链接一</a></li>
+				<li><a href="javascript:;" class="link">超链接二</a></li>
+				<li><a href="javascript:;" class="link">超链接三</a></li>
+				<li><a href="javascript:;" class="link">超链接四</a></li>
+			</ul>
+			<button id = "btn">添加超链接</button>
+		</div>
+	</body>
+</html>

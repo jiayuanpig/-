@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <script>
+        //countBs：接受一个字符串参数，返回字符串中有多少大写字母B
+        //countChar：两个参数，指定需要统计的字符
+
+        function countBs(chars){
+            var num = 0;
+            for(var i = 0;i<chars.length;i++){
+                if(chars.charAt(i) == "B"){
+                    num++;
+                }
+            }
+            return num;
+        }
+        console.log(countBs("BBBBsdffeb"));
+        
+        function countChar(chars,aimChar){
+            var num = 0;
+            for(var i = 0;i<chars.length;i++){
+                if(chars.charAt(i) == aimChar){
+                    num++;
+                }
+            }
+            return num;
+        }
+
+        console.log(countChar("BBBBsdffeb","b"));
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>图片浏览</title>
+		<style type="text/css">
+			*{
+				text-align: center;
+			}
+			#outer{
+				width: 2000px;
+				margin: 500 auto;
+				padding: 100px;
+				background-color: greenyellow;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				/*点击切换按钮*/
+				var btn1 = document.getElementById("before");
+				var btn2 = document.getElementById("next");
+				var img = document.getElementsByTagName("img")[0];
+				var imgArr = ["img/1.jpg","img/2.jpg","img/3.jpg"];
+				var index = 0;
+				
+				
+				btn1.onclick = function(){
+//					alert("上一张");
+					index--;
+					if(index<0) index = 0;
+					img.src = imgArr[index];
+				}
+				btn2.onclick = function(){
+//					alert("下一张");
+					index++;
+					if(index > 2) index = 2;
+					img.src = imgArr[index];
+				} 
+			}
+		
+			 
+		</script>
+	</head>
+	<body>
+		
+		<div id = "outer">
+			<img src="img/1.jpg" alt="樱花少女"/>
+			<button id = "before">上一张</button>
+			<button id = "next">下一张</button>
+		</div>
+		
+	</body>
+</html>

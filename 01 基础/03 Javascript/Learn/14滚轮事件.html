@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#div{
+				width: 100px;
+				height: 100px;
+				background-color: blueviolet;
+				
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				//效果：滚动滚轮，改变div高度
+				var div = document.getElementById("div");
+				div.onmousewheel = function(event){
+//					alert("我滚了~~~");
+					event = event || window.event;
+					//判断滚轮方向，来确定变高还是变矮
+//					event.wheelDelta:向上120，向下-120
+					//保证浏览器兼容
+					if(event.wheelDelta > 0 || event.wheelData < 0){
+					div.style.height = div.clientHeight + 10 + "px";
+					}else{
+					div.style.height = div.clientHeight - 10 + "px";
+					}
+					//当页面本身存在滚动条时，滚动滚轮，页面也会滚动
+					//这是浏览器的默认行为，为解决此问题，可以return false
+					return false;
+				}
+				
+				
+				
+			}
+		</script>
+	</head>
+	<body style="height: 2000px;">
+		<div id="div"></div>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="utf-8">
+		<title>增删插改</title>
+		<style>
+			label{
+				background-color: yellow;
+				border: dotted;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				myClick("add",function(){
+//					alert("add");
+					var label = document.createElement("label");
+					var gzText = document.createTextNode("广州");
+					label.appendChild(gzText);
+					var city = document.getElementById("city");
+					city.appendChild(label);
+				})
+				myClick("insert",function(){
+					var label = document.createElement("label");
+					var gzText = document.createTextNode("广州");
+					label.appendChild(gzText);
+					var bj = document.getElementById("bj");
+					var city = document.getElementById("city");
+					city.insertBefore(label,bj);
+				})
+				myClick("replace",function(){
+					var label = document.createElement("label");
+					var gzText = document.createTextNode("广州");
+					label.appendChild(gzText);
+					var bj = document.getElementById("bj");
+					var city = document.getElementById("city");
+					city.replaceChild(label,bj);
+				})
+				myClick("delete",function(){
+					var bj = document.getElementById("bj");
+					var city = document.getElementById("city");
+//					city.removeChild(bj);
+					bj.parentNode.removeChild(bj);
+				})
+				
+				
+				
+			}
+			function myClick(idStr,fun){
+				var btn = document.getElementById(idStr);
+				btn.onclick = fun;
+			}
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<div style="border:double;padding:20px;background-color: #ADFF2F;">
+			<div>
+				你喜欢的城市：
+			</div>
+			<br />
+			<div id="city">
+				<label id="sc" >四川</label>
+				<label id="bj" >北京</label>
+				<label id="sh" >上海</label>
+				<label id="wh" >武汉</label>
+			</div>
+		</div>
+		<br />
+		<div>
+			<button id="add">添加广州</button>
+			<button id="insert">插入广州</button>
+			<button id="replace">替换广州</button>
+			<button id="delete">删除北京</button>
+			<button id="change">更改广州</button>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>员工表</title>
+		<style>
+			#employeeTable{
+				width:100%;
+				border-collapse: collapse;
+				text-align: center;			
+			}
+			#employeeTable th{
+				font-size:1em;
+				border:1px solid #98bf21;
+			}
+			#employeeTable td {
+			    font-size:1.1em;
+			    padding-top:5px;
+			    padding-bottom:4px;
+			    background-color:#A7C942;
+			    color:#ffffff;
+			    border:1px solid #98bf21;
+			}
+			#formDiv{
+				text-align: left;
+				border: groove;
+				padding: 50px;
+				width: 50%;
+			}
+		</style>
+		<script type="text/javascript">
+			function delA (){
+//				alert("hello");
+//				alert(this);
+				var tr = this.parentNode.parentNode;
+				var name = tr.children[0].innerHTML;
+//				alert(name);
+				if(confirm("确认删除"+name+"吗？")){
+					tr.parentNode.removeChild(tr);
+				}
+			}
+			window.onload = function(){
+				//删除操作
+				var aAll = document.getElementsByTagName("a");
+//				alert(aAll.length);
+				for(var i=0;i<aAll.length;i++){
+					aAll[i].onclick = delA;
+				}
+				
+				//提交信息
+				var addBtn = document.getElementById("addBtn");
+				addBtn.onclick = function(){
+					if(confirm("确定提交该员工信息？")){
+						//获取输入值
+						var name = document.getElementById("name").value;
+						var email = document.getElementById("email").value;
+						var salary = document.getElementById("salary").value;
+//						alert(name+","+email+","+salary);
+						//创建样式
+						var tr = document.createElement("tr");
+						var nameTh = document.createElement("th");
+						var emailTh = document.createElement("th");
+						var salaryTh = document.createElement("th");
+						var deleteTh = document.createElement("th");
+						var a = document.createElement("a");
+						//创建文本节点
+						var nameText = document.createTextNode(name);
+						var emailText = document.createTextNode(email);
+						var salaryText = document.createTextNode(salary);
+						var delText = document.createTextNode("delete");
+						//将各节点组合
+						nameTh.appendChild(nameText);
+						emailTh.appendChild(emailText);
+						salaryTh.appendChild(salaryText);
+						deleteTh.appendChild(a);
+						a.appendChild(delText);
+						a.href = "javascript:;"//向a标签添加href属性
+						tr.appendChild(nameTh);
+						tr.appendChild(emailTh);
+						tr.appendChild(salaryTh);
+						tr.appendChild(deleteTh);
+						//获取table
+						var table = document.getElementById("employeeTable");
+//						var tbody = table.getElementsByTagName("tbody");
+//						tbody.appendChild(tr);//添加到tbody中，保证和初始数据一致
+						table.appendChild(tr);//添加到tbody中
+						//给a标签添加响应函数
+						a.onclick = delA;
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<table id="employeeTable">
+			<tr>
+				<td>name</td>
+				<td>email</td>
+				<td>salary</td>
+				<td>delete</td>
+			</tr>
+			<tr>
+				<th>Tom</th>
+				<th>abc@qq.com</th>
+				<th>2000</th>
+				<th><a href="javascript:;">delete</a></th>
+			</tr>
+			<tr>
+				<th>Jerry</th>
+				<th>666@qq.com</th>
+				<th>5000</th>
+				<th><a href="javascript:;">delete</a></th>
+			</tr>
+			<tr>
+				<th>Jacob</th>
+				<th>123@qq.com</th>
+				<th>200000</th>
+				<th><a href="javascript:;">delete</a></th>
+			</tr>
+		</table>
+		
+		<br /><br /><br /><br />
+		
+		<div id="formDiv">
+			
+				<h4>添加新员工：</h4>
+				
+				<table>
+					<tr>
+						<td class="word">name:</td>
+						<td class="inp">
+							<input type="text" name="name" id="name" />
+						</td>
+					</tr>
+					<tr>
+						<td class="word">email:</td>
+						<td class="inp">
+							<input type="text" name="email" id="email" />
+						</td>
+					</tr>
+					<tr>
+						<td class="word">salary:</td>
+						<td class="inp">
+							<input type="text" name="salary" id="salary" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button id="addBtn">提交</button>
+						</td>
+					</tr>
+				</table>
+				
+			
+		</div>
+		
+</html>

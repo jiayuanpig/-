@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			#box1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				left: 0;/*避免IE返回为auto*/
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn1 = document.getElementById("btn1");
+				var box1 = document.getElementById("box1");
+				//定义一个变量保存timer
+				var timer;
+				btn1.onclick = function(){//向右移动
+					//清除上一个定时器效果
+					clearInterval(timer);
+					//开启定时器实现动画效果
+					timer = setInterval(function(){
+						var oldValue = parseInt(getStyle(box1,"left"));
+						var newValue = oldValue + 10;
+						box1.style.left = newValue + "px";
+						//确保停在指定位置
+						if(newValue >600){
+							newValue = 600;
+						}
+						//限制移动距离
+						if(newValue >=600){
+							clearInterval(timer); 
+						}
+					},30);
+				}
+				btn2.onclick = function(){//向左移动
+					//清除上一个定时器效果
+					clearInterval(timer);
+					//开启定时器实现动画效果
+					timer = setInterval(function(){
+						var oldValue = parseInt(getStyle(box1,"left"));
+						var newValue = oldValue - 10;
+						box1.style.left = newValue + "px";
+						//确保停在指定位置
+						if(newValue < 0){
+							newValue = 0;
+						}
+						//限制移动距离
+						if(newValue <= 0){
+							clearInterval(timer); 
+						}
+					},30);
+				}
+			}
+			//获取元素当前显示样式
+			function getStyle(obj,name){
+				if(window.getComputedStyle){
+					//正常浏览器方式，有getComputedStyle方法
+					return getComputedStyle(obj,null)[name];
+				}else{
+					//IE8的方式，没有getComputedStyle方法
+					return obj.currentStyle[name];
+				}
+				//另一种简洁代码
+//				return window.getComputedStyle?getComputedStyle(obj,null)[name]:obj.currentStyle[name]
+			}
+		</script>
+	</head>
+	<body>
+		<button id="btn1">点击以后box1向右移动</button>
+		<button id="btn2">点击以后box1向左移动</button>
+		<br /><br />
+		<div id="box1"></div>
+		<div style="width: 0;height: 200px;top: 0;border-left: 1px solid black;left: 600px;position: absolute;"></div>
+	</body>
+</html>

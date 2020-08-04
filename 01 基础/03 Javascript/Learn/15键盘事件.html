@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/*
+			 * 可以通过keyCode 获取按键的编码，通过它可以判断哪个键被按下了
+			 * 同时
+			 * 		altKey
+			 * 		ctrlKey
+			 * 		shiftKey
+			 * 	可以分别判断 alt ctrl shift 是否被按下
+			 */
+			window.onload = function(){
+				var input = document.getElementById("input");
+//				document.onkeydown = function(event){
+////					console.log("键盘被按下了");
+////					console.log(event.keyCode);
+//					if(event.keyCode ==89 && event.altKey){
+//						console.log("alt 和 Y 一起被按下");
+//					}
+//				}
+//				document.onkeyup = function(){
+////					console.log("键盘被松开了");
+//				}
+				//让文本框中只能输入数字
+				input.onkeydown = function(event){
+//					console.log(event.keyCode);
+					//数字为48 - 57
+					if(event.keyCode<48 ||event.keyCode>57){
+//						console.log(event.keyCode);
+						return false;
+					}
+					
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input  id="input"/>
+	</body>
+</html>
